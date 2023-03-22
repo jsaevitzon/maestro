@@ -8,6 +8,7 @@ import okio.Sink
 import org.slf4j.LoggerFactory
 import java.awt.image.BufferedImage
 import javax.imageio.ImageIO
+import java.time.LocalDateTime
 
 class ScreenshotUtils {
     companion object {
@@ -42,6 +43,8 @@ class ScreenshotUtils {
                 if (latestHierarchy == hierarchyAfter) {
                     val isLoading = latestHierarchy.root.attributes.getOrDefault("is-loading", "false").toBoolean()
                     if (!isLoading) {
+                        LOGGER.info("View loaded " + LocalDateTime.now())
+                        println("View loaded " + LocalDateTime.now())
                         return hierarchyAfter
                     }
                 }

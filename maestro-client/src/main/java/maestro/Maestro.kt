@@ -34,6 +34,8 @@ import okio.sink
 import org.slf4j.LoggerFactory
 import java.awt.image.BufferedImage
 import java.io.File
+import java.time.LocalDateTime
+
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 class Maestro(private val driver: Driver) : AutoCloseable {
@@ -191,6 +193,8 @@ class Maestro(private val driver: Driver) : AutoCloseable {
             longPress,
             hierarchyBeforeTap,
         )
+        LOGGER.info("Tap done" + LocalDateTime.now())
+        println("Tap done" + LocalDateTime.now())
 
         if (waitUntilVisible) {
             val hierarchyAfterTap = viewHierarchy()
@@ -257,10 +261,10 @@ class Maestro(private val driver: Driver) : AutoCloseable {
     }
 
     private fun screenshotBasedTap(x: Int,
-                                  y: Int,
-                                  retryIfNoChange: Boolean = true,
-                                  longPress: Boolean = false,
-                                  initialHierarchy: ViewHierarchy? = null) {
+                                   y: Int,
+                                   retryIfNoChange: Boolean = true,
+                                   longPress: Boolean = false,
+                                   initialHierarchy: ViewHierarchy? = null) {
         LOGGER.info("Tapping at ($x, $y) using screenshot based logic for wait")
 
         val hierarchyBeforeTap = initialHierarchy ?: viewHierarchy()
